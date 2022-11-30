@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SHOT   LGUI(LSFT(KC_5))
 #define SPOT   LGUI(KC_SPC)
+#define SHDL   LGUI(LSFT(KC_H))
 
 #define LOWER  MO(1)
 #define RAISE  MO(2)
@@ -82,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX,    SPOT, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______, _______,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX,    SPOT,    SHDL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    SHOT,                          PIN,    PASS, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|

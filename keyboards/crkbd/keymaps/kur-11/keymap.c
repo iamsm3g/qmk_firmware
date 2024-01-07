@@ -19,9 +19,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-#define SHOT   LGUI(LSFT(KC_5))
-#define SPOT   LGUI(KC_SPC)
-#define SHDL   LGUI(LSFT(KC_H))
+#define SHOT      LGUI(LSFT(KC_5))
+#define SPOT      LGUI(KC_SPC)
+#define KILREG    LSFT(KC_DEL)
+#define KILRIG    LCTL(KC_INS)
+#define YANK      LSFT(KC_INS)
+#define CON1      LCTL(LALT(KC_F1))
+#define CON2      LCTL(LALT(KC_F2))
+#define CON3      LCTL(LALT(KC_F3))
+#define CON4      LCTL(LALT(KC_F4))
+#define CON5      LCTL(LALT(KC_F5))
 
 #define LOWER  MO(1)
 #define RAISE  MO(2)
@@ -41,17 +48,17 @@ enum {
   TD_PASS
 };
 
-void dance_pin_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_pin_finished(tap_dance_state_t *state, void *user_data) {
   if (state->count > 1)
     SEND_STRING(PIN_STR SS_TAP(X_ENT));
 }
 
-void dance_pass_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_pass_finished(tap_dance_state_t *state, void *user_data) {
   if (state->count > 1)
     SEND_STRING(PASS_STR SS_TAP(X_ENT));
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_PIN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_pin_finished, NULL),
   [TD_PASS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_pass_finished, NULL),
 };
@@ -83,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX,    SPOT,    SHDL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______, _______,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX,    SPOT, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    SHOT,                          PIN,    PASS, _______, _______, _______, _______,
+      _______, XXXXXXX,  KILREG,  KILRIG,    YANK,    SHOT,                          PIN,    PASS, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______,  ADJUST, _______
                                       //`--------------------------'  `--------------------------'
@@ -99,13 +106,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, KC_RBRC, XXXXXXX,   KC_AT,                      KC_UNDS, KC_PLUS, KC_LABK, KC_RABK, KC_QUES, KC_PIPE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         KC_LANG1,  ADJUST,KC_LANG2,    _______, _______, _______
+                                          KC_LNG1,  ADJUST, KC_LNG2,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, XXXXXXX,
+      QK_BOOT,    CON1,    CON2,    CON3,    CON4,    CON5,                        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
